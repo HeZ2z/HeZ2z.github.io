@@ -1,0 +1,476 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>关于openwrt路由器及哆点Drcom校园网WEB自动登录 | HeZi</title><meta name="author" content="HeZi"><meta name="copyright" content="HeZi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="前言最近买了新华三H3CPro路由器(下文简称”华三”)，我的需求就是千兆、能刷openwrt进行二次开发，WIFI6这些。而华三满足这些，且价格合适，所以就入手了。这里记录一下路由器的一些配置和使用。 哆点Drcom校园网认证系统为广州热点软件科技股份有限公司研发，若你的校园网登录界面有本计费系统由广州热点软件科技股份有限公司提供字样，那么你可以参考这篇文章。 目前已知使用此系统大学:  中国矿">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于openwrt路由器及哆点Drcom校园网WEB自动登录">
+<meta property="og:url" content="https://hezi930.github.io/2024/06/03/%E5%85%B3%E4%BA%8Eopenwrt%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8F%8A%E5%93%86%E7%82%B9Drcom%E6%A0%A1%E5%9B%AD%E7%BD%91WEB%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95/index.html">
+<meta property="og:site_name" content="HeZi">
+<meta property="og:description" content="前言最近买了新华三H3CPro路由器(下文简称”华三”)，我的需求就是千兆、能刷openwrt进行二次开发，WIFI6这些。而华三满足这些，且价格合适，所以就入手了。这里记录一下路由器的一些配置和使用。 哆点Drcom校园网认证系统为广州热点软件科技股份有限公司研发，若你的校园网登录界面有本计费系统由广州热点软件科技股份有限公司提供字样，那么你可以参考这篇文章。 目前已知使用此系统大学:  中国矿">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/142383180?v=4">
+<meta property="article:published_time" content="2024-06-02T16:41:06.000Z">
+<meta property="article:modified_time" content="2024-06-16T09:17:39.413Z">
+<meta property="article:author" content="HeZi">
+<meta property="article:tag" content="路由器">
+<meta property="article:tag" content="校园网自动登录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/142383180?v=4"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://hezi930.github.io/2024/06/03/%E5%85%B3%E4%BA%8Eopenwrt%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8F%8A%E5%93%86%E7%82%B9Drcom%E6%A0%A1%E5%9B%AD%E7%BD%91WEB%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>(()=>{
+      const saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+      
+      window.btf = {
+        saveToLocal: saveToLocal,
+        getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+          script.src = url
+          script.async = true
+          script.onerror = reject
+          script.onload = script.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            script.onload = script.onreadystatechange = null
+            resolve()
+          }
+
+          Object.keys(attr).forEach(key => {
+            script.setAttribute(key, attr[key])
+          })
+
+          document.head.appendChild(script)
+        }),
+
+        getCSS: (url, id = false) => new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = url
+          if (id) link.id = id
+          link.onerror = reject
+          link.onload = link.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            link.onload = link.onreadystatechange = null
+            resolve()
+          }
+          document.head.appendChild(link)
+        }),
+
+        addGlobalFn: (key, fn, name = false, parent = window) => {
+          const pjaxEnable = false
+          if (!pjaxEnable && key.startsWith('pjax')) return
+
+          const globalFn = parent.globalFn || {}
+          const keyObj = globalFn[key] || {}
+    
+          if (name && keyObj[name]) return
+    
+          name = name || Object.keys(keyObj).length
+          keyObj[name] = fn
+          globalFn[key] = keyObj
+          parent.globalFn = globalFn
+        }
+      }
+    
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+      
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })()</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: HeZi","link":"链接: ","source":"来源: HeZi","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '关于openwrt路由器及哆点Drcom校园网WEB自动登录',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-06-16 17:17:39'
+}</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/142383180?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="HeZi"><span class="site-name">HeZi</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">关于openwrt路由器及哆点Drcom校园网WEB自动登录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-02T16:41:06.000Z" title="发表于 2024-06-03 00:41:06">2024-06-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-16T09:17:39.413Z" title="更新于 2024-06-16 17:17:39">2024-06-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近买了新华三H3CPro路由器(下文简称”华三”)，我的需求就是千兆、能刷openwrt进行二次开发，WIFI6这些。而华三满足这些，且价格合适，所以就入手了。这里记录一下路由器的一些配置和使用。</p>
+<p><strong>哆点Drcom校园网</strong>认证系统为<strong>广州热点软件科技股份有限公司</strong>研发，若你的校园网登录界面有<strong>本计费系统由广州热点软件科技股份有限公司提供</strong>字样，那么你可以参考这篇文章。</p>
+<p>目前已知使用此系统大学:</p>
+<ul>
+<li>中国矿业大学</li>
+</ul>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>需要：</p>
+<ul>
+<li><p>硬件：新华三H3CPro路由器、两条网线、可插网线的电脑</p>
+<ul>
+<li><ol>
+<li>如果旧路由器工作正常。网线 1 一端连接 旧路由器 的 LAN 口，对端连接 华三 的 WAN 口；网线 2 一端连接 华三 的 LAN 口，对端连接电脑的网口</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>如果旧路由器无法工作。网线 1 一端连接 华三 的 WAN 口，对端连接宽带；网线 2 一端连接 华三 的 LAN 口，对端连接电脑的网口</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>软件：PuTTY（用于SSH连接，目前在尝试VSCode，待我整完发上来）、浏览器(推荐使用Firefox、Chrome、Edge)、TFTP工具（用于刷写固件）</p>
+<ul>
+<li>启用电脑的 Telnet 服务：<br>  在Windows上启用Telnet服务，你可以按照以下步骤操作：<ul>
+<li><ol>
+<li>打开“控制面板”。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>点击“程序”。</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>在“程序和功能”部分点击“打开或关闭Windows功能”。</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>在弹出的窗口中，找到并勾选“Telnet客户端”。</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>点击“确定”按钮。</li>
+</ol>
+</li>
+<li><p>PS：启用Telnet服务后，你可以使用Windows的Telnet客户端连接到路由器。但是，请注意，Telnet协议不安全，所有的内容都是明文传输，包括你的密码。因此，建议只在安全的内部网络中使用Telnet，或者使用更安全的替代品，如SSH。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>待刷写镜像及工具的下载：</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">文件名</th>
+<th align="center">描述</th>
+<th align="center">下载</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">openwrt-*-preloader.bin</td>
+<td align="center">BL2</td>
+<td align="center"><a href="https://firmware-selector.openwrt.org/?target=mediatek/filogic&id=h3c_magic-nx30-pro">页面</a></td>
+</tr>
+<tr>
+<td align="center">openwrt-*-bl31-uboot.fip</td>
+<td align="center">FIP</td>
+<td align="center">同上</td>
+</tr>
+<tr>
+<td align="center">openwrt-*-initramfs-recovery.itb</td>
+<td align="center">initramfs 镜像</td>
+<td align="center">同上</td>
+</tr>
+<tr>
+<td align="center">openwrt-*-squashfs-sysupgrade.itb</td>
+<td align="center">Sysupgrade 镜像</td>
+<td align="center">同上</td>
+</tr>
+<tr>
+<td align="center">Tftpd64-4.64-setup.exe</td>
+<td align="center">TFTP 工具安装包</td>
+<td align="center"><a target="_blank" rel="noopener" href="https://bitbucket.org/phjounin/tftpd64/downloads/Tftpd64-4.64-setup.exe">链接</a></td>
+</tr>
+</tbody></table>
+<p>⚠️ 为了避免无线局域网的干扰，可以暂时将电脑的无线网络断开。</p>
+<h1 id="刷openwrt"><a href="#刷openwrt" class="headerlink" title="刷openwrt"></a>刷openwrt</h1><p>到手之后简单看了一下原厂固件。发现并不能满足我校园网自动登录的需求，所以就决定刷openwrt。</p>
+<p>按照<a target="_blank" rel="noopener" href="https://ericclose.github.io/install-openwrt-on-h3c_magic-nx30-pro.html">Eric的文章</a>一步一步来，最终成功刷入。</p>
+<p>PS:刷入的时候还是需要网络的，可以留着之前的路由器，然后分出一个lan口插入华三的wan口，这样既可以配置也可以联网。还有就是我没有刷入主题，这部分应该是无关紧要，各位自行判断。</p>
+<h1 id="配置校园网自动登录"><a href="#配置校园网自动登录" class="headerlink" title="配置校园网自动登录"></a>配置校园网自动登录</h1><p>我们的校园网是需要登录的，而openwrt默认并没有这个功能。所以需要自己写一个脚本来实现。</p>
+<h2 id="1-抓取curl登录请求"><a href="#1-抓取curl登录请求" class="headerlink" title="1. 抓取curl登录请求"></a>1. 抓取curl登录请求</h2><p>首先抓取登录页面的<code>form</code>表单，然后用<code>curl</code>发送<code>post</code>请求，最后检查是否登录成功。</p>
+<p>(以Firefox为例)</p>
+<ul>
+<li><ol>
+<li>打开Firefox，打开校园网登录界面，按<code>F12</code>打开开发者工具，切换到<code>网络</code>选项卡，然后输入账号密码登陆校园网。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>在<code>网络</code>选项卡中找到<code>login</code>请求</li>
+</ol>
+<ul>
+<li><ol>
+<li>通过 <code>响应</code>找到含有<code>认证成功</code>的内容，回到<code>消息头</code>，右键点击，选择<code>复制</code>，然后选择<code>复制为cURL（bash）</code>。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>筛选<code>消息头</code>，找到含有你的账号密码的内容，并复制。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-编写登录脚本"><a href="#2-编写登录脚本" class="headerlink" title="2. 编写登录脚本"></a>2. 编写登录脚本</h2><p>首先，我们需要在路由器上安装<code>curl</code>，这个工具是用来发送请求的。<br>用PuTTY连接到路由器，然后输入以下命令安装<code>curl</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install curl</span><br></pre></td></tr></table></figure>
+
+<p>而我们得到的curl请求是临时的，我们需要脚本使其永久可用。<br>以我得到的为例（此处账号密码均12345678代替）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://10.2.5.251:801/eportal/?c=Portal&amp;a=login&amp;callback=dr1717394791717&amp;login_method=1&amp;user_account=12345678%40cmcc&amp;user_password=12345678&amp;wlan_user_ip=10.4.12.125&amp;wlan_user_mac=000000000000&amp;wlan_ac_ip=&amp;wlan_ac_name=&amp;jsVersion=3.0&amp;_=1717394787248</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我们需要写一个自动登录的脚本。<br>创建一个自动登录的文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /root/auto_login</span><br><span class="line">cd /root/auto_login</span><br><span class="line">vi auto_login.sh</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后输入以下内容，注意修改账号密码和curl，curl请自行对照修改，eth0和eth1的接口情况不一定每一台路由器都相同，请按照实际情况自行测试：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取eth1接口的IP地址</span></span><br><span class="line">CURRENT_IP=$(ifconfig eth1 | grep <span class="string">&#x27;inet addr:&#x27;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | <span class="built_in">cut</span> -d: -f2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取eth0接口的MAC地址</span></span><br><span class="line">MAC_ADDRESS=$(ifconfig eth0 | grep <span class="string">&#x27;HWaddr&#x27;</span> | awk <span class="string">&#x27;&#123;print $5&#125;&#x27;</span> | <span class="built_in">tr</span> <span class="string">&#x27;[:upper:]&#x27;</span> <span class="string">&#x27;[:lower:]&#x27;</span> | <span class="built_in">tr</span> <span class="string">&#x27;:&#x27;</span> <span class="string">&#x27;-&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印调试信息</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Current IP: <span class="variable">$CURRENT_IP</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;MAC Address: <span class="variable">$MAC_ADDRESS</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 用户账户和密码,运营商：CUCC为中国联通，CMCC为中国移动，CTCC为中国电信，校园网只填学号，不填运营商</span></span><br><span class="line">USER_ACCOUNT=<span class="string">&quot;12345678@运营商&quot;</span></span><br><span class="line">USER_PASSWORD=<span class="string">&quot;12345678&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 发送登录请求</span></span><br><span class="line">curl <span class="string">&quot;http://10.2.5.251:801/eportal/?c=Portal&amp;a=login&amp;callback=dr1717342168111&amp;login_method=1&amp;user_account=<span class="variable">$USER_ACCOUNT</span>&amp;user_password=<span class="variable">$USER_PASSWORD</span>&amp;wlan_user_ip=<span class="variable">$CURRENT_IP</span>&amp;wlan_user_mac=<span class="variable">$MAC_ADDRESS</span>&amp;wlan_ac_ip=&amp;wlan_ac_name=&amp;jsVersion=3.0&amp;_=1717342133611&quot;</span> 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>接下来给脚本运行权限：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x auto_login.sh</span><br></pre></td></tr></table></figure>
+
+<p>然后我们可以先注销，再手动运行一下脚本，看看是否能够成功登录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./auto_login.sh</span><br></pre></td></tr></table></figure>
+<p>若是出现<code>认证成功</code>及其类似字样，则说明登录成功。</p>
+<p>至此，一个自动登录的脚本就成功了。</p>
+<h2 id="3-开机自启以及断网重联"><a href="#3-开机自启以及断网重联" class="headerlink" title="3. 开机自启以及断网重联"></a>3. 开机自启以及断网重联</h2><p>我们需要将脚本设置为开机自启，以及断网重连。<br>开机自启可以通过<code>/etc/rc.local</code>实现，断网重连可以通过<code>crontab</code>实现。</p>
+<h3 id="1-开机自启"><a href="#1-开机自启" class="headerlink" title="1 开机自启"></a>1 开机自启</h3><p>编辑<code>/etc/rc.local</code>文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/rc.local</span><br></pre></td></tr></table></figure>
+
+<p>在文件中添加以下内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/auto_login/auto_login.sh</span><br></pre></td></tr></table></figure>
+
+<p>:wq，保存退出。</p>
+<h3 id="2-断网重连"><a href="#2-断网重连" class="headerlink" title="2 断网重连"></a>2 断网重连</h3><ul>
+<li><ol>
+<li>我们可以通过<code>ping</code>命令来检测网络是否正常，如果网络不正常，我们就执行<code>auto_login.sh</code>脚本。</li>
+</ol>
+<p>  首先创建ping文件夹和ping.sh文件并编辑：<br>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /root/ping</span><br><span class="line">cd /root/ping</span><br><span class="line">vi ping.sh</span><br></pre></td></tr></table></figure><br>  然后输入以下内容(带有路由器重启，不过我们学校工作日晚上会断网，所以我设置了十一点到八点断网不重启)：<br>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/sh</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">ping 的总次数</span></span><br><span class="line">PING_SUM=3</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">ping 的间隔时间，单位秒</span></span><br><span class="line">SLEEP_SEC=10</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">连续重启网卡 REBOOT_CNT 次网络都没有恢复正常，重启软路由</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">时间= (SLEEP_SEC * PING_SUM + 20) * REBOOT_CNT</span></span><br><span class="line">REBOOT_CNT=3</span><br><span class="line">LOG_PATH=&quot;/root/ping/log.txt&quot;</span><br><span class="line">cnt=0</span><br><span class="line">reboot_cnt=0</span><br><span class="line">while :</span><br><span class="line">do</span><br><span class="line">    ping -c 1 -W 1 www.baidu.com &gt; /dev/null</span><br><span class="line">    ret=$?</span><br><span class="line">    </span><br><span class="line">    ping -c 1 -W 1 www.bilibili.com &gt; /dev/null</span><br><span class="line">    ret2=$?</span><br><span class="line">    if [[ $ret -eq 0 || $ret2 -eq 0 ]]</span><br><span class="line">    then</span><br><span class="line">        echo -e &#x27;network is ok\r&#x27;</span><br><span class="line">        exit</span><br><span class="line">        #cnt=0</span><br><span class="line">        #reboot_cnt=0</span><br><span class="line">    else</span><br><span class="line">        cnt=`expr $cnt + 1`</span><br><span class="line">        echo -n `date &#x27;+%Y-%m-%d %H:%M:%S&#x27;` &gt;&gt; $LOG_PATH</span><br><span class="line">        printf &#x27;-&gt; [%d/%d] Network maybe disconnected,checking again after %d seconds!\r\n&#x27; $cnt $PING_SUM $SLEEP_SEC &gt;&gt; $LOG_PATH</span><br><span class="line">        printf &#x27;-&gt; [%d/%d] Network maybe disconnected,checking again after %d seconds!\r\n&#x27; $cnt $PING_SUM $SLEEP_SEC </span><br><span class="line">        </span><br><span class="line">        if [ $cnt == $PING_SUM ]</span><br><span class="line">        then</span><br><span class="line">            echo &#x27;try to re curl&#x27; &gt;&gt; $LOG_PATH</span><br><span class="line">            echo &#x27;ifup wan!!!&#x27;</span><br><span class="line">            sleep 5</span><br><span class="line">            sh /root/auto_login/auto_login.sh</span><br><span class="line">            </span><br><span class="line">            cnt=0</span><br><span class="line">            #重连后，等待10秒再进行ping检测</span><br><span class="line">            sleep 8</span><br><span class="line">            #网卡重启超过指定次数还没恢复正常，重启软路由</span><br><span class="line">            reboot_cnt=`expr $reboot_cnt + 1`</span><br><span class="line">            if [ $reboot_cnt == $REBOOT_CNT ]</span><br><span class="line">            then</span><br><span class="line">                current_hour=`date &#x27;+%H&#x27;`</span><br><span class="line">                if [ $current_hour -ge 8 -a $current_hour -lt 23 ]</span><br><span class="line">                then</span><br><span class="line">                    echo -n `date &#x27;+%Y-%m-%d %H:%M:%S reboot!&#x27;` &gt;&gt; $LOG_PATH</span><br><span class="line">                    echo &#x27;-&gt; Network has some problem, lets reboot&#x27; &gt;&gt; $LOG_PATH</span><br><span class="line">                    echo &#x27;-&gt; =============== reboot!&#x27;</span><br><span class="line">                    reboot</span><br><span class="line">                fi</span><br><span class="line">            fi</span><br><span class="line">        fi</span><br><span class="line">    fi    </span><br><span class="line">    sleep $SLEEP_SEC</span><br><span class="line">done</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>  :wq，保存退出。</p>
+<p>  给脚本运行权限：<br>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x ping.sh</span><br></pre></td></tr></table></figure></p>
+<p>  然后我们可以先注销，再手动运行一下脚本，看看是否能够成功登录：<br>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ping.sh</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><ol start="2">
+<li>接下来使用crontab，它是一个用于执行定时任务的工具，我们可以通过它来实现重连。<br>编辑<code>/etc/crontabs/root</code>文件：  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/crontabs/root</span><br></pre></td></tr></table></figure>
+  在文件中添加以下内容：  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/1 * * * * /root/ping/ping.sh</span><br></pre></td></tr></table></figure>
+  这里的<code>*/1 * * * *</code>表示每1分钟执行一次<code>ping.sh</code>脚本，如有需要可以修改。</li>
+</ol>
+<p>  注意：我们需要查看crontab是否已经启动，如果没有启动，我们需要手动启动：<br>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/cron status</span><br></pre></td></tr></table></figure></p>
+<p>  如果没有启动，我们可以通过以下命令启动：<br>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/cron start</span><br></pre></td></tr></table></figure></p>
+<p>  同时，我们可以把它添加到开机自启：<br>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/cron enable</span><br></pre></td></tr></table></figure><br>  这样就可以实现断网重连了。</p>
+</li>
+</ul>
+<p>至此，我们就实现了校园网自动登录以及断网重连。🍾🍾🍾</p>
+<h1 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://ericclose.github.io/install-openwrt-on-h3c_magic-nx30-pro.html">华三H3CPro路由器刷openwrt-Eric-个人博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yeziwinone/p/14522486.html">openwrt实现校园网自动登录-叶子在行动-博客园</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq248606117/article/details/125144699">openwrt校园网自动登录且断网重连-in dreaming-CSDN</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://hezi930.github.io">HeZi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://hezi930.github.io/2024/06/03/%E5%85%B3%E4%BA%8Eopenwrt%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8F%8A%E5%93%86%E7%82%B9Drcom%E6%A0%A1%E5%9B%AD%E7%BD%91WEB%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95/">https://hezi930.github.io/2024/06/03/%E5%85%B3%E4%BA%8Eopenwrt%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8F%8A%E5%93%86%E7%82%B9Drcom%E6%A0%A1%E5%9B%AD%E7%BD%91WEB%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hezi930.github.io" target="_blank">HeZi</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</a><a class="post-meta__tags" href="/tags/%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95/">校园网自动登录</a></div><div class="post_share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/142383180?v=4" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/20/%E8%BD%AC%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A%E7%9B%B8%E5%85%B3/" title="转计算机专业相关"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">转计算机专业相关</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/13/Pygame%E8%B4%AA%E5%90%83%E8%9B%87/" title="Pygame贪吃蛇"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Pygame贪吃蛇</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/142383180?v=4" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">HeZi</div><div class="author-info__description">关注Github，一起CS</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/hezi930"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客，这里主要是大学的一堆事务</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%B7openwrt"><span class="toc-number">3.</span> <span class="toc-text">刷openwrt</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95"><span class="toc-number">4.</span> <span class="toc-text">配置校园网自动登录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%8A%93%E5%8F%96curl%E7%99%BB%E5%BD%95%E8%AF%B7%E6%B1%82"><span class="toc-number">4.1.</span> <span class="toc-text">1. 抓取curl登录请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%BC%96%E5%86%99%E7%99%BB%E5%BD%95%E8%84%9A%E6%9C%AC"><span class="toc-number">4.2.</span> <span class="toc-text">2. 编写登录脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E4%BB%A5%E5%8F%8A%E6%96%AD%E7%BD%91%E9%87%8D%E8%81%94"><span class="toc-number">4.3.</span> <span class="toc-text">3. 开机自启以及断网重联</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF"><span class="toc-number">4.3.1.</span> <span class="toc-text">1 开机自启</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%96%AD%E7%BD%91%E9%87%8D%E8%BF%9E"><span class="toc-number">4.3.2.</span> <span class="toc-text">2 断网重连</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">参考链接：</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/13/Pygame%E8%B4%AA%E5%90%83%E8%9B%87/" title="Pygame贪吃蛇">Pygame贪吃蛇</a><time datetime="2024-06-13T07:32:57.000Z" title="发表于 2024-06-13 15:32:57">2024-06-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/03/%E5%85%B3%E4%BA%8Eopenwrt%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8F%8A%E5%93%86%E7%82%B9Drcom%E6%A0%A1%E5%9B%AD%E7%BD%91WEB%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95/" title="关于openwrt路由器及哆点Drcom校园网WEB自动登录">关于openwrt路由器及哆点Drcom校园网WEB自动登录</a><time datetime="2024-06-02T16:41:06.000Z" title="发表于 2024-06-03 00:41:06">2024-06-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/20/%E8%BD%AC%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A%E7%9B%B8%E5%85%B3/" title="转计算机专业相关">转计算机专业相关</a><time datetime="2024-05-19T17:45:58.000Z" title="发表于 2024-05-20 01:45:58">2024-05-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/12/%E5%85%B3%E4%BA%8E%E6%9C%AA%E6%9D%A5%E8%B5%B0%E5%90%91/" title="关于未来走向">关于未来走向</a><time datetime="2024-05-12T14:44:10.000Z" title="发表于 2024-05-12 22:44:10">2024-05-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/22/%E4%BD%BF%E7%94%A8GPT%E7%9A%84%E4%BD%9C%E6%96%87%E4%BF%AE%E6%94%B9%E6%B5%81%E7%A8%8B/" title="使用GPT的作文修改流程">使用GPT的作文修改流程</a><time datetime="2024-03-22T05:33:01.000Z" title="发表于 2024-03-22 13:33:01">2024-03-22</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By HeZi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script>(() => {
+  const panguFn = () => {
+    if (typeof pangu === 'object') pangu.autoSpacingPage()
+    else {
+      btf.getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+        .then(() => {
+          pangu.autoSpacingPage()
+        })
+    }
+  }
+
+  const panguInit = () => {
+    if (false){
+      GLOBAL_CONFIG_SITE.isPost && panguFn()
+    } else {
+      panguFn()
+    }
+  }
+
+  btf.addGlobalFn('pjaxComplete', panguInit, 'pangu')
+  document.addEventListener('DOMContentLoaded', panguInit)
+})()</script><div class="js-pjax"><script>(() => {
+  const runMermaid = (ele) => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from(ele).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+    
+    codeMermaidEle.forEach(ele => {
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.innerHTML = `<pre class="mermaid-src" hidden>${ele.textContent}</pre>`
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+  
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var qweather_key = 'b16a1fa0e63c46a4b8f28abfb06ae3fe';
+  var gaud_map_key = '0975b102a0fbc49f80e205bb3438fc84';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '117，34';
+  var clock_default_rectangle_enable = 'true';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.js"></script><!-- hexo injector body_end end --></body></html>
