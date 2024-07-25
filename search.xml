@@ -282,59 +282,6 @@ start()
       </tags>
   </entry>
   <entry>
-    <title>使用GPT的作文修改流程</title>
-    <url>/2024/03/22/%E4%BD%BF%E7%94%A8GPT%E7%9A%84%E4%BD%9C%E6%96%87%E4%BF%AE%E6%94%B9%E6%B5%81%E7%A8%8B/</url>
-    <content><![CDATA[<p>（本文为借用大模型进行对作文修改的一些方法，仅供参考</p>
-<h2 id="重要提醒："><a href="#重要提醒：" class="headerlink" title="重要提醒："></a><strong>重要提醒：</strong></h2><p>！！！在使用AI修改之前，请确保你对英语作文的写作和结构有基本的认识。AI只是作为修改工具，你应该先自行完成作文草稿，然后再用GPT进行修改。这样可以确保修改的方向与你的思路一致（同时也能提高AI的识别准确率）。</p>
-<p>不要盲目听信AI。如果你觉得自己的作文有亮点被修改了，请询问GPT为什么进行了修改，如果你认为修改不妥，可以改回来。毕竟这是你的作文，而不是GPT的。</p>
-<p>不要完全依赖AI的修改建议，如果你认为某些修改不符合您的意愿或风格，可以自行调整。要记住，虽然大型语言模型可以提供有价值的建议，但最终的决定权在于你自己。</p>
-<h2 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a><strong>注意事项：</strong></h2><ul>
-<li><p><strong>使用单一窗口进行修改</strong>：在整个修改过程中，请尽量在一个窗口内进行，这样GPT可以记住之前的对话和上下文。如果在修改过程中频繁切换窗口，可能会影响GPT的理解和回答。</p>
-</li>
-<li><p><strong>GPT和批改网的AI有时候会产生矛盾</strong>：这并不重要，重要的是通过修改提升写作水平，取得理想的成绩。</p>
-</li>
-<li><p><strong>英文聊天会更准确</strong>：尽量使用英文进行交流，这样GPT的回答会更加贴合文章。不过，如果更习惯使用中文也可以。</p>
-</li>
-</ul>
-<h2 id="修改流程："><a href="#修改流程：" class="headerlink" title="修改流程："></a>修改流程：</h2><p><strong>（以下是修改流程的具体步骤，仅供参考，具体使用的时候就把对方当成一个人，想问什么问什么，想怎么说怎么说。注意每次修改的时候都要加入自己的想法，不懂的地方就要问，这又不是真人，只有你自己知道跟他说了什么：）</strong></p>
-<ul>
-<li><p><strong>1.发送提示词(直接复制粘贴，<a href="https://github.com/wikieden/awesome-chatgpt-prompts">内容来自Github</a>)</strong>:使用以下提示词来启动GPT，提醒它你需要进行作文修改。提示词：</p>
-<blockquote>
-<p>I want you to act as an AI writing tutor. I will provide you with a student who needs help improving their writing and your task is to use artificial intelligence tools, such as natural language processing, to give the student feedback on how they can improve their composition. You should also use your rhetorical knowledge and experience about effective writing techniques in order to suggest ways that the student can better express their thoughts and ideas in written form.</p>
-</blockquote>
-</li>
-<li><p><strong>2.发送作文题目和内容</strong>:将作文题目和内容发送给GPT，让它检查语法和词汇错误，并给出修改建议。</p>
-</li>
-<li><p><strong>3.逐段检查</strong>:逐段发送作文给GPT，让它修正语法、词汇错误，并优化句式和段落结构。在每一段修改后，仔细检查并根据需要调整。</p>
-</li>
-<li><p><strong>4.全文检查：</strong>:当每个段落都修改完毕后，将整篇作文发送给GPT，检查全文的结构和段落间的衔接问题，并进行必要的修改。</p>
-</li>
-<li><p><strong>5.请GPT自行写一篇：</strong>:最后，可以让GPT自己写一篇文章作为参考，当作范文学习。记得在过程中多与GPT进行互动，询问原因或提出更改意见。</p>
-</li>
-</ul>
-<h2 id="其他资料"><a href="#其他资料" class="headerlink" title="其他资料:"></a>其他资料:</h2><p>以下是另外一个详细的教程，供参考：<a href="https://blog.csdn.net/He_r_o/article/details/129050606?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22129050606%22,%22source%22:%22He_r_o%22%7D&fromshare=blogdetail">教程链接</a></p>
-<p>祝你修改顺利！</p>
-]]></content>
-      <categories>
-        <category>学习生活</category>
-      </categories>
-      <tags>
-        <tag>GPT</tag>
-        <tag>作文</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于未来走向</title>
-    <url>/2024/05/12/%E5%85%B3%E4%BA%8E%E6%9C%AA%E6%9D%A5%E8%B5%B0%E5%90%91/</url>
-    <content><![CDATA[<h1 id="这里讲一下本站未来的走向和规划"><a href="#这里讲一下本站未来的走向和规划" class="headerlink" title="这里讲一下本站未来的走向和规划"></a>这里讲一下本站未来的走向和规划</h1><h2 id="关于之前"><a href="#关于之前" class="headerlink" title="关于之前"></a>关于之前</h2><p>本站是一个个人博客，主要用于记录一些生活的内容，但是因为 <del>我比较懒</del> 个人精力有限，所以更新频率不高，内容也比较零散。</p>
-<h2 id="关于未来"><a href="#关于未来" class="headerlink" title="关于未来"></a>关于未来</h2><p><strong>现在我已经转专业到计算机科学与技术专业。</strong></p>
-<p>相比于之前，现在有更多的时间专注于计算机技术方面的学习。所以目前的计划是将本站转变为一个技术博客，主要记录一些技术相关的内容。但是如果日常生活中有一些有趣的事情，也会记录在这里。</p>
-]]></content>
-      <categories>
-        <category>未来规划</category>
-      </categories>
-  </entry>
-  <entry>
     <title>关于openwrt路由器及哆点Drcom校园网WEB自动登录</title>
     <url>/2024/06/03/%E5%85%B3%E4%BA%8Eopenwrt%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8F%8A%E5%93%86%E7%82%B9Drcom%E6%A0%A1%E5%9B%AD%E7%BD%91WEB%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近买了新华三H3CPro路由器(下文简称”华三”)，我的需求就是千兆、能刷openwrt进行二次开发，WIFI6这些。而华三满足这些，且价格合适，所以就入手了。这里记录一下路由器的一些配置和使用。</p>
@@ -514,22 +461,72 @@ start()
       </tags>
   </entry>
   <entry>
-    <title>政治小组展示(2023.10.26</title>
-    <url>/2023/10/26/%E6%94%BF%E6%B2%BB%E5%B0%8F%E7%BB%84%E5%B1%95%E7%A4%BA(10.26/</url>
-    <content><![CDATA[<p><img src="/pic/zhengzhi/1.png" alt="img"></p>
-<p><a href="%22https://www.bilibili.com/video/BV1z54y157pQ/?spm_id_from=333.337.search-card.all.click&vd_source=3e670711b1540d35ccfef2ba2ea5483b%22">此处视频不想下载点这里”https://www.bilibili.com/video/BV1z54y157pQ/?spm_id_from&#x3D;333.337.search-card.all.click&amp;vd_source&#x3D;3e670711b1540d35ccfef2ba2ea5483b”</a></p>
-<p><a href="https://url71.ctfile.com/f/47486571-964363200-a8cf56?p=5010">下载链接：“信仰，光芒万丈！”-1080P 高码率-AVC.mp4: https://url71.ctfile.com/f/47486571-964363200-a8cf56?p=5010(访问密码: 5010)</a></p>
-<p><img src="/pic/zhengzhi/2.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/3.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/4.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/5.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/6.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/7.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/8.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/9.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/10.png" alt="img"></p>
-<p><a href="/ppt/zhengzhi/1.pptx" title="ppt下载">点击下载ppt</a></p>
-<p>[ai生成PPT网址：<a href="https://gamma.app/signup?r=zwx09wxpqdntpfi%5Dhttps://gamma.app/signup?r=zwx09wxpqdntpfi">https://gamma.app/signup?r=zwx09wxpqdntpfi]https://gamma.app/signup?r=zwx09wxpqdntpfi</a></p>
+    <title>使用GPT的作文修改流程</title>
+    <url>/2024/03/22/%E4%BD%BF%E7%94%A8GPT%E7%9A%84%E4%BD%9C%E6%96%87%E4%BF%AE%E6%94%B9%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<p>（本文为借用大模型进行对作文修改的一些方法，仅供参考</p>
+<h2 id="重要提醒："><a href="#重要提醒：" class="headerlink" title="重要提醒："></a><strong>重要提醒：</strong></h2><p>！！！在使用AI修改之前，请确保你对英语作文的写作和结构有基本的认识。AI只是作为修改工具，你应该先自行完成作文草稿，然后再用GPT进行修改。这样可以确保修改的方向与你的思路一致（同时也能提高AI的识别准确率）。</p>
+<p>不要盲目听信AI。如果你觉得自己的作文有亮点被修改了，请询问GPT为什么进行了修改，如果你认为修改不妥，可以改回来。毕竟这是你的作文，而不是GPT的。</p>
+<p>不要完全依赖AI的修改建议，如果你认为某些修改不符合您的意愿或风格，可以自行调整。要记住，虽然大型语言模型可以提供有价值的建议，但最终的决定权在于你自己。</p>
+<h2 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a><strong>注意事项：</strong></h2><ul>
+<li><p><strong>使用单一窗口进行修改</strong>：在整个修改过程中，请尽量在一个窗口内进行，这样GPT可以记住之前的对话和上下文。如果在修改过程中频繁切换窗口，可能会影响GPT的理解和回答。</p>
+</li>
+<li><p><strong>GPT和批改网的AI有时候会产生矛盾</strong>：这并不重要，重要的是通过修改提升写作水平，取得理想的成绩。</p>
+</li>
+<li><p><strong>英文聊天会更准确</strong>：尽量使用英文进行交流，这样GPT的回答会更加贴合文章。不过，如果更习惯使用中文也可以。</p>
+</li>
+</ul>
+<h2 id="修改流程："><a href="#修改流程：" class="headerlink" title="修改流程："></a>修改流程：</h2><p><strong>（以下是修改流程的具体步骤，仅供参考，具体使用的时候就把对方当成一个人，想问什么问什么，想怎么说怎么说。注意每次修改的时候都要加入自己的想法，不懂的地方就要问，这又不是真人，只有你自己知道跟他说了什么：）</strong></p>
+<ul>
+<li><p><strong>1.发送提示词(直接复制粘贴，<a href="https://github.com/wikieden/awesome-chatgpt-prompts">内容来自Github</a>)</strong>:使用以下提示词来启动GPT，提醒它你需要进行作文修改。提示词：</p>
+<blockquote>
+<p>I want you to act as an AI writing tutor. I will provide you with a student who needs help improving their writing and your task is to use artificial intelligence tools, such as natural language processing, to give the student feedback on how they can improve their composition. You should also use your rhetorical knowledge and experience about effective writing techniques in order to suggest ways that the student can better express their thoughts and ideas in written form.</p>
+</blockquote>
+</li>
+<li><p><strong>2.发送作文题目和内容</strong>:将作文题目和内容发送给GPT，让它检查语法和词汇错误，并给出修改建议。</p>
+</li>
+<li><p><strong>3.逐段检查</strong>:逐段发送作文给GPT，让它修正语法、词汇错误，并优化句式和段落结构。在每一段修改后，仔细检查并根据需要调整。</p>
+</li>
+<li><p><strong>4.全文检查：</strong>:当每个段落都修改完毕后，将整篇作文发送给GPT，检查全文的结构和段落间的衔接问题，并进行必要的修改。</p>
+</li>
+<li><p><strong>5.请GPT自行写一篇：</strong>:最后，可以让GPT自己写一篇文章作为参考，当作范文学习。记得在过程中多与GPT进行互动，询问原因或提出更改意见。</p>
+</li>
+</ul>
+<h2 id="其他资料"><a href="#其他资料" class="headerlink" title="其他资料:"></a>其他资料:</h2><p>以下是另外一个详细的教程，供参考：<a href="https://blog.csdn.net/He_r_o/article/details/129050606?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22129050606%22,%22source%22:%22He_r_o%22%7D&fromshare=blogdetail">教程链接</a></p>
+<p>祝你修改顺利！</p>
+]]></content>
+      <categories>
+        <category>学习生活</category>
+      </categories>
+      <tags>
+        <tag>GPT</tag>
+        <tag>作文</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于未来走向</title>
+    <url>/2024/05/12/%E5%85%B3%E4%BA%8E%E6%9C%AA%E6%9D%A5%E8%B5%B0%E5%90%91/</url>
+    <content><![CDATA[<h1 id="这里讲一下本站未来的走向和规划"><a href="#这里讲一下本站未来的走向和规划" class="headerlink" title="这里讲一下本站未来的走向和规划"></a>这里讲一下本站未来的走向和规划</h1><h2 id="关于之前"><a href="#关于之前" class="headerlink" title="关于之前"></a>关于之前</h2><p>本站是一个个人博客，主要用于记录一些生活的内容，但是因为 <del>我比较懒</del> 个人精力有限，所以更新频率不高，内容也比较零散。</p>
+<h2 id="关于未来"><a href="#关于未来" class="headerlink" title="关于未来"></a>关于未来</h2><p><strong>现在我已经转专业到计算机科学与技术专业。</strong></p>
+<p>相比于之前，现在有更多的时间专注于计算机技术方面的学习。所以目前的计划是将本站转变为一个技术博客，主要记录一些技术相关的内容。但是如果日常生活中有一些有趣的事情，也会记录在这里。</p>
+]]></content>
+      <categories>
+        <category>未来规划</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>大学生心理健康课展示(2023.12.18</title>
+    <url>/2023/12/18/%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E8%AF%BE%E5%B1%95%E7%A4%BA(2023.12.18/</url>
+    <content><![CDATA[<p>你好！欢迎来到我的博客，这篇为大学生心理健康教育的ppt展示。我，以及我们宿舍全体成员搜集资料以及创建原版ppt，ai进行美化，最后再由我进行排版，<a href="https://gamma.app/signup?r=zwx09wxpqdntpfi%E3%80%82">ai生成PPT网址(https://gamma.app/signup?r=zwx09wxpqdntpfi)</a></p>
+<p><a href="/ppt/mentalhealth/202312180.pptx" title="ppt下载">展示ppt点击下载</a></p>
+<p><a href="/ppt/mentalhealth/202312181.pptx" title="ppt下载">原版ppt点击下载</a></p>
+<p><img src="/pic/mentalhealth/202312180_01.png" alt="img"></p>
+<p><img src="/pic/mentalhealth/202312180_02.png" alt="img"></p>
+<p><img src="/pic/mentalhealth/202312180_03.png" alt="img"></p>
+<p><img src="/pic/mentalhealth/202312180_04.png" alt="img"></p>
+<p><img src="/pic/mentalhealth/202312180_05.png" alt="img"></p>
+<p><img src="/pic/mentalhealth/202312180_06.png" alt="img"></p>
+<p><img src="/pic/mentalhealth/202312180_07.png" alt="img"></p>
+<p><img src="/pic/mentalhealth/202312180_08.png" alt="img"></p>
 ]]></content>
       <categories>
         <category>学习生活</category>
@@ -567,19 +564,22 @@ start()
       </tags>
   </entry>
   <entry>
-    <title>大学生心理健康课展示(2023.12.18</title>
-    <url>/2023/12/18/%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E8%AF%BE%E5%B1%95%E7%A4%BA(2023.12.18/</url>
-    <content><![CDATA[<p>你好！欢迎来到我的博客，这篇为大学生心理健康教育的ppt展示。我，以及我们宿舍全体成员搜集资料以及创建原版ppt，ai进行美化，最后再由我进行排版，<a href="https://gamma.app/signup?r=zwx09wxpqdntpfi%E3%80%82">ai生成PPT网址(https://gamma.app/signup?r=zwx09wxpqdntpfi)</a></p>
-<p><a href="/ppt/mentalhealth/202312180.pptx" title="ppt下载">展示ppt点击下载</a></p>
-<p><a href="/ppt/mentalhealth/202312181.pptx" title="ppt下载">原版ppt点击下载</a></p>
-<p><img src="/pic/mentalhealth/202312180_01.png" alt="img"></p>
-<p><img src="/pic/mentalhealth/202312180_02.png" alt="img"></p>
-<p><img src="/pic/mentalhealth/202312180_03.png" alt="img"></p>
-<p><img src="/pic/mentalhealth/202312180_04.png" alt="img"></p>
-<p><img src="/pic/mentalhealth/202312180_05.png" alt="img"></p>
-<p><img src="/pic/mentalhealth/202312180_06.png" alt="img"></p>
-<p><img src="/pic/mentalhealth/202312180_07.png" alt="img"></p>
-<p><img src="/pic/mentalhealth/202312180_08.png" alt="img"></p>
+    <title>政治小组展示(2023.10.26</title>
+    <url>/2023/10/26/%E6%94%BF%E6%B2%BB%E5%B0%8F%E7%BB%84%E5%B1%95%E7%A4%BA(10.26/</url>
+    <content><![CDATA[<p><img src="/pic/zhengzhi/1.png" alt="img"></p>
+<p><a href="%22https://www.bilibili.com/video/BV1z54y157pQ/?spm_id_from=333.337.search-card.all.click&vd_source=3e670711b1540d35ccfef2ba2ea5483b%22">此处视频不想下载点这里”https://www.bilibili.com/video/BV1z54y157pQ/?spm_id_from&#x3D;333.337.search-card.all.click&amp;vd_source&#x3D;3e670711b1540d35ccfef2ba2ea5483b”</a></p>
+<p><a href="https://url71.ctfile.com/f/47486571-964363200-a8cf56?p=5010">下载链接：“信仰，光芒万丈！”-1080P 高码率-AVC.mp4: https://url71.ctfile.com/f/47486571-964363200-a8cf56?p=5010(访问密码: 5010)</a></p>
+<p><img src="/pic/zhengzhi/2.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/3.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/4.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/5.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/6.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/7.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/8.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/9.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/10.png" alt="img"></p>
+<p><a href="/ppt/zhengzhi/1.pptx" title="ppt下载">点击下载ppt</a></p>
+<p>[ai生成PPT网址：<a href="https://gamma.app/signup?r=zwx09wxpqdntpfi%5Dhttps://gamma.app/signup?r=zwx09wxpqdntpfi">https://gamma.app/signup?r=zwx09wxpqdntpfi]https://gamma.app/signup?r=zwx09wxpqdntpfi</a></p>
 ]]></content>
       <categories>
         <category>学习生活</category>
@@ -587,6 +587,38 @@ start()
       <tags>
         <tag>PPT</tag>
         <tag>大学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>转计算机专业相关</title>
+    <url>/2024/05/20/%E8%BD%AC%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>大晚上睡不着，写一下转专业这件事。我是一个物理系的学生，志愿填报失误加上分数差一点，所以没有被计算机录取。可是当转专业报名系统开放的那一天，我发现我还是忘不了计算机。</p>
+<h1 id="转专业的原因以及流程"><a href="#转专业的原因以及流程" class="headerlink" title="转专业的原因以及流程"></a>转专业的原因以及流程</h1><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>如上所述，我还是忘不了计算机。各位转专业之前想好是否真的热爱或者有理由转。</p>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>转计算机就是初筛，机考，面试。</p>
+<p>初筛的话，前几年只看高数的加权，而24年除了高数还有总加权，所以大一还是要好好学一下，最起码总加权能到85左右比较保险。</p>
+<p>机考就是会有一些编程题，你做题，老师打分，然后及格线上的会去面试。</p>
+<p>面试在近年来的比重逐渐降低，做一做准备，别太过分就好。</p>
+<h3 id="前置任务"><a href="#前置任务" class="headerlink" title="前置任务"></a>前置任务</h3><p>高数看<a href="https://csdiy.wiki/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/MITmaths/">MIT Calculus Course(18.01和18.02)</a>，就是对应的微积分课程便好。学校考试的范围有超出，可以去<a href="https://space.bilibili.com/1035929235">B站看一高数</a>速通一下，然后做做往年的高数真题，基本也差不多了。</p>
+<p>专业课什么的自己去学，这里不多赘述。</p>
+<h3 id="机考准备"><a href="#机考准备" class="headerlink" title="机考准备"></a>机考准备</h3><p>首先感谢学长整理的的<a href="https://github.com/CuzWeAre/CUMT_Program-Test/">中国矿业大学转计算机学院机考试题 </a>,这里有往年的考试题和学校以及学院的相关政策，可以让大家先有一个充分的了解。</p>
+<p>我们可以看到。22年和23年的试题主要还是在考察语法层面，还比较简单。但是24年的试题就有点难度了，考察的是一些基础的数据结构和算法，比如说栈、队列、链表、树等等。这就要求我们要好好学习了。</p>
+<p>语言方面可以使用C、C++或者Python。</p>
+<p>建议之前有基础的就可以继续自己的语言。</p>
+<p>如果你三种语言都没学过，可以从python开始。因为你大一下学期学校会开python相关课程，这样会轻松一点。（测控专业的同学大一下学期会学c++，所以你从c++开始也行）</p>
+<h1 id="考试注意"><a href="#考试注意" class="headerlink" title="考试注意"></a>考试注意</h1><h3 id="注意时间"><a href="#注意时间" class="headerlink" title="注意时间"></a>注意时间</h3><p>考试的时候要<strong>注意时间</strong>，不要卡在一道题上，可以先做简单的题目，然后再做难的题目。这样可以保证分数。能多一分是一分，已经到机考这一步了，说不定保证几个简单题就过了。</p>
+<h3 id="注意细节"><a href="#注意细节" class="headerlink" title="注意细节"></a>注意细节</h3><p>另外，虽然24年考题难度有所增加，但是我们观察到最终录取人数并没有明显减少，这说明了老师们改卷的时候还是有一定的宽容度，把能写的都写上去，不要放弃任何一分，还是有机会的。比如要求用冒泡排序完成，那我们就先写一个冒泡排序的函数，然后再调用这个函数，这样即使结果不对，也可以得到一些分数。能多一分是一分，已经到机考这一步了，说不定多写几个函数就过了。</p>
+<h3 id="注意注释"><a href="#注意注释" class="headerlink" title="注意注释"></a>注意注释</h3><p>写注释是程序员的美德，转专业的人们总会说注释会给你加分，但也有人说不会。总归抱着宁可信其有的心态，还是写一下吧，毕竟写不完题也不是因为注释。能多一分是一分，已经到机考这一步了，说不定多写几个注释就过了。</p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>看到这里，我想你已经对这个流程有了大概的了解，可以去看看计算机的培养方案。如果你已经下定决心的话，那么现在就去做吧，先把前几年的真题做了，不懂可以Google一下或者问Copilot，再去看看<a href="https://csdiy.wiki/">CS自学指南</a>，加油！</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;祝你成功！&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="相关QQ群链接"><a href="#相关QQ群链接" class="headerlink" title="相关QQ群链接"></a>相关QQ群链接</h2><p>点击链接加入群聊<a href="https://qm.qq.com/q/uRLgPh9bRm">【矿大转专业交流群(定期清低活,误踢请重新申请）】：831110233</a></p>
+<p>点击链接加入群聊<a href="https://qm.qq.com/q/37RW6UU0ta">【CUMT转计算机交流群】：866766652</a></p>
+]]></content>
+      <categories>
+        <category>未来规划</category>
+      </categories>
+      <tags>
+        <tag>转专业</tag>
       </tags>
   </entry>
   <entry>
@@ -628,38 +660,6 @@ start()
         <tag>大学</tag>
         <tag>物理创新实验设计</tag>
         <tag>学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>转计算机专业相关</title>
-    <url>/2024/05/20/%E8%BD%AC%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>大晚上睡不着，写一下转专业这件事。我是一个物理系的学生，志愿填报失误加上分数差一点，所以没有被计算机录取。可是当转专业报名系统开放的那一天，我发现我还是忘不了计算机。</p>
-<h1 id="转专业的原因以及流程"><a href="#转专业的原因以及流程" class="headerlink" title="转专业的原因以及流程"></a>转专业的原因以及流程</h1><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>如上所述，我还是忘不了计算机。各位转专业之前想好是否真的热爱或者有理由转。</p>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>转计算机就是初筛，机考，面试。</p>
-<p>初筛的话，前几年只看高数的加权，而24年除了高数还有总加权，所以大一还是要好好学一下，最起码总加权能到85左右比较保险。</p>
-<p>机考就是会有一些编程题，你做题，老师打分，然后及格线上的会去面试。</p>
-<p>面试在近年来的比重逐渐降低，做一做准备，别太过分就好。</p>
-<h3 id="前置任务"><a href="#前置任务" class="headerlink" title="前置任务"></a>前置任务</h3><p>高数看<a href="https://csdiy.wiki/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/MITmaths/">MIT Calculus Course(18.01和18.02)</a>，就是对应的微积分课程便好。学校考试的范围有超出，可以去<a href="https://space.bilibili.com/1035929235">B站看一高数</a>速通一下，然后做做往年的高数真题，基本也差不多了。</p>
-<p>专业课什么的自己去学，这里不多赘述。</p>
-<h3 id="机考准备"><a href="#机考准备" class="headerlink" title="机考准备"></a>机考准备</h3><p>首先感谢学长整理的的<a href="https://github.com/CuzWeAre/CUMT_Program-Test/">中国矿业大学转计算机学院机考试题 </a>,这里有往年的考试题和学校以及学院的相关政策，可以让大家先有一个充分的了解。</p>
-<p>我们可以看到。22年和23年的试题主要还是在考察语法层面，还比较简单。但是24年的试题就有点难度了，考察的是一些基础的数据结构和算法，比如说栈、队列、链表、树等等。这就要求我们要好好学习了。</p>
-<p>语言方面可以使用C、C++或者Python。</p>
-<p>建议之前有基础的就可以继续自己的语言。</p>
-<p>如果你三种语言都没学过，可以从python开始。因为你大一下学期学校会开python相关课程，这样会轻松一点。（测控专业的同学大一下学期会学c++，所以你从c++开始也行）</p>
-<h1 id="考试注意"><a href="#考试注意" class="headerlink" title="考试注意"></a>考试注意</h1><h3 id="注意时间"><a href="#注意时间" class="headerlink" title="注意时间"></a>注意时间</h3><p>考试的时候要<strong>注意时间</strong>，不要卡在一道题上，可以先做简单的题目，然后再做难的题目。这样可以保证分数。能多一分是一分，已经到机考这一步了，说不定保证几个简单题就过了。</p>
-<h3 id="注意细节"><a href="#注意细节" class="headerlink" title="注意细节"></a>注意细节</h3><p>另外，虽然24年考题难度有所增加，但是我们观察到最终录取人数并没有明显减少，这说明了老师们改卷的时候还是有一定的宽容度，把能写的都写上去，不要放弃任何一分，还是有机会的。比如要求用冒泡排序完成，那我们就先写一个冒泡排序的函数，然后再调用这个函数，这样即使结果不对，也可以得到一些分数。能多一分是一分，已经到机考这一步了，说不定多写几个函数就过了。</p>
-<h3 id="注意注释"><a href="#注意注释" class="headerlink" title="注意注释"></a>注意注释</h3><p>写注释是程序员的美德，转专业的人们总会说注释会给你加分，但也有人说不会。总归抱着宁可信其有的心态，还是写一下吧，毕竟写不完题也不是因为注释。能多一分是一分，已经到机考这一步了，说不定多写几个注释就过了。</p>
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>看到这里，我想你已经对这个流程有了大概的了解，可以去看看计算机的培养方案。如果你已经下定决心的话，那么现在就去做吧，先把前几年的真题做了，不懂可以Google一下或者问Copilot，再去看看<a href="https://csdiy.wiki/">CS自学指南</a>，加油！</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;祝你成功！&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="相关QQ群链接"><a href="#相关QQ群链接" class="headerlink" title="相关QQ群链接"></a>相关QQ群链接</h2><p>点击链接加入群聊<a href="https://qm.qq.com/q/uRLgPh9bRm">【矿大转专业交流群(定期清低活,误踢请重新申请）】：831110233</a></p>
-<p>点击链接加入群聊<a href="https://qm.qq.com/q/37RW6UU0ta">【CUMT转计算机交流群】：866766652</a></p>
-]]></content>
-      <categories>
-        <category>未来规划</category>
-      </categories>
-      <tags>
-        <tag>转专业</tag>
       </tags>
   </entry>
 </search>
