@@ -324,17 +324,6 @@ start()
       </tags>
   </entry>
   <entry>
-    <title>关于未来走向</title>
-    <url>/2024/05/12/%E5%85%B3%E4%BA%8E%E6%9C%AA%E6%9D%A5%E8%B5%B0%E5%90%91/</url>
-    <content><![CDATA[<h1 id="这里讲一下本站未来的走向和规划"><a href="#这里讲一下本站未来的走向和规划" class="headerlink" title="这里讲一下本站未来的走向和规划"></a>这里讲一下本站未来的走向和规划</h1><h2 id="关于之前"><a href="#关于之前" class="headerlink" title="关于之前"></a>关于之前</h2><p>本站是一个个人博客，主要用于记录一些生活的内容，但是因为 <del>我比较懒</del> 个人精力有限，所以更新频率不高，内容也比较零散。</p>
-<h2 id="关于未来"><a href="#关于未来" class="headerlink" title="关于未来"></a>关于未来</h2><p><strong>现在我已经转专业到计算机科学与技术专业。</strong></p>
-<p>相比于之前，现在有更多的时间专注于计算机技术方面的学习。所以目前的计划是将本站转变为一个技术博客，主要记录一些技术相关的内容。但是如果日常生活中有一些有趣的事情，也会记录在这里。</p>
-]]></content>
-      <categories>
-        <category>未来规划</category>
-      </categories>
-  </entry>
-  <entry>
     <title>关于openwrt路由器及哆点Drcom校园网WEB自动登录</title>
     <url>/2024/06/03/%E5%85%B3%E4%BA%8Eopenwrt%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8F%8A%E5%93%86%E7%82%B9Drcom%E6%A0%A1%E5%9B%AD%E7%BD%91WEB%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近买了新华三H3CPro路由器(下文简称”华三”)，我的需求就是千兆、能刷openwrt进行二次开发，WIFI6这些。而华三满足这些，且价格合适，所以就入手了。这里记录一下路由器的一些配置和使用。</p>
@@ -514,6 +503,17 @@ start()
       </tags>
   </entry>
   <entry>
+    <title>关于未来走向</title>
+    <url>/2024/05/12/%E5%85%B3%E4%BA%8E%E6%9C%AA%E6%9D%A5%E8%B5%B0%E5%90%91/</url>
+    <content><![CDATA[<h1 id="这里讲一下本站未来的走向和规划"><a href="#这里讲一下本站未来的走向和规划" class="headerlink" title="这里讲一下本站未来的走向和规划"></a>这里讲一下本站未来的走向和规划</h1><h2 id="关于之前"><a href="#关于之前" class="headerlink" title="关于之前"></a>关于之前</h2><p>本站是一个个人博客，主要用于记录一些生活的内容，但是因为 <del>我比较懒</del> 个人精力有限，所以更新频率不高，内容也比较零散。</p>
+<h2 id="关于未来"><a href="#关于未来" class="headerlink" title="关于未来"></a>关于未来</h2><p><strong>现在我已经转专业到计算机科学与技术专业。</strong></p>
+<p>相比于之前，现在有更多的时间专注于计算机技术方面的学习。所以目前的计划是将本站转变为一个技术博客，主要记录一些技术相关的内容。但是如果日常生活中有一些有趣的事情，也会记录在这里。</p>
+]]></content>
+      <categories>
+        <category>未来规划</category>
+      </categories>
+  </entry>
+  <entry>
     <title>大学生心理健康课展示(2023.12.18</title>
     <url>/2023/12/18/%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E8%AF%BE%E5%B1%95%E7%A4%BA(2023.12.18/</url>
     <content><![CDATA[<p>你好！欢迎来到我的博客，这篇为大学生心理健康教育的ppt展示。我，以及我们宿舍全体成员搜集资料以及创建原版ppt，ai进行美化，最后再由我进行排版，<a href="https://gamma.app/signup?r=zwx09wxpqdntpfi%E3%80%82">ai生成PPT网址(https://gamma.app/signup?r=zwx09wxpqdntpfi)</a></p>
@@ -534,47 +534,6 @@ start()
       <tags>
         <tag>PPT</tag>
         <tag>大学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>物理实验创新设计中期研讨(2023.12.03</title>
-    <url>/2023/12/03/%E7%89%A9%E7%90%86%E5%AE%9E%E9%AA%8C%E5%88%9B%E6%96%B0%E8%AE%BE%E8%AE%A1%E4%B8%AD%E6%9C%9F%E7%A0%94%E8%AE%A8(2023.12.03/</url>
-    <content><![CDATA[<p>你好！欢迎来到我的博客，这篇为物理创新实验设计中期研讨的ppt展示。由我们小组共同完成，<a href="https://gamma.app/signup?r=zwx09wxpqdntpfi%E3%80%82">ai生成PPT网址(https://gamma.app/signup?r=zwx09wxpqdntpfi)</a></p>
-<p><a href="/ppt/physics/2312030.pptx" title="ppt下载">展示ppt点击下载</a></p>
-<p><a href="/ppt/physics/2312031.pptx" title="ppt下载">原版ppt点击下载</a></p>
-<p><a href="http://hezi.space/2023/10/29/%E7%89%A9%E7%90%86%E5%88%9B%E6%96%B0%E5%AE%9E%E9%AA%8C%E8%AE%BE%E8%AE%A1/">上节回顾点击查看（即第一次研讨内容）</a></p>
-<p>本次研讨主要围绕声音的产生原理以及为何巨型发声板会发出向量而不寻常的声波展开（比较赶时间，而且实验器材不全，所以稍显仓促）</p>
-<p><img src="/pic/physics/2312030/2312030_01.png" alt="img"></p>
-<p>这里默认大家都知道研究课题（不知道的可以去看一下<a href="http://hezi.space/2023/10/29/%E7%89%A9%E7%90%86%E5%88%9B%E6%96%B0%E5%AE%9E%E9%AA%8C%E8%AE%BE%E8%AE%A1/">第一次研讨内容（点击即看）</a>）。</p>
-<p>我们决定研究先从声音切入，因为这部分相对来说会更加容易切入。</p>
-<p>所以让我先介绍一下声音的产生原理（基本所有声音的产生都如以下过程）</p>
-<p><img src="/pic/physics/2312030/2312030_02.png" alt="img"></p>
-<p>那为什么巨型发声板发出的声音不同寻常呢？众所周知，共振效应会使系统的振动幅度大幅提高，所以我们考虑了一下板材振动时的共振效应。</p>
-<p>下图为一个系统在不同输入频率和不同阻尼系数下的共振效应。</p>
-<p>让我来解释一下这张图：</p>
-<p>相信大家在中学阶段都学过共振曲线，具体表现和下图形状相似，只不过下图中最特殊的就是加入不同阻尼系数影响（即图中的 “德尔塔 &#x3D; Damping coefficient” ）。</p>
-<p>通过图表我们可以看出当阻尼系数逐渐减小时，振幅在物体固有频率等于输入频率的附近区间会明显地逐渐增大，而阻尼系数为0 且物体固有频率等于输入频率时，振幅则会趋于无穷大，也就是图表中的“Disastrous resonance when 德尔塔 &#x3D; 0 for 欧米伽A&#x2F;欧米伽0 &#x3D; 1”</p>
-<p>那我们不禁思考：巨型发声板是否可以减小阻尼，使共振的振幅更大，进而发出响亮而不同寻常的声音呢？</p>
-<p><img src="/pic/physics/2312030/2312030_03.png" alt="img"></p>
-<p>带着问题，我们设计了如下实验过程（改变变量环节ppt有误，过程应添加“改变板材的材质，厚度，大小，重复实验”）</p>
-<p><img src="/pic/physics/2312030/2312030_04.png" alt="img"></p>
-<p>但是电动活塞目前还没有到我们的手中，所以暂且用手工代替，不过这就体现了振动源的不准确性，所以我们获得的音频数据价值很低，下面是两段初步处理的音频演示，由于价值不高故只放出图片。</p>
-<p><img src="/pic/physics/2312030/2312030_05.png" alt="img"></p>
-<p>这里还有更多音频数据，同样由于价值不高故只放出图片。</p>
-<p><img src="/pic/physics/2312030/2312030_06.png" alt="img"></p>
-<p>此外，这是我们实验中遇到的问题。</p>
-<p><img src="/pic/physics/2312030/2312030_07.png" alt="img"></p>
-<p><img src="/pic/physics/2312030/2312030_08.png" alt="img"></p>
-<p>目前进度如此，后续器材到货之后，可能会把如何找到共振频率和对声波进行傅里叶变换的教程发上来，敬请期待~♥</p>
-]]></content>
-      <categories>
-        <category>学习生活</category>
-      </categories>
-      <tags>
-        <tag>PPT</tag>
-        <tag>大学</tag>
-        <tag>物理创新实验设计</tag>
-        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -619,6 +578,47 @@ start()
 <p><img src="/pic/physics/2023_05.png" alt="img"></p>
 <p><img src="/pic/physics/2023_06.png" alt="img"></p>
 <p><img src="/pic/physics/2023_07.png" alt="img"><br><img src="/pic/physics/2023_08.png" alt="img"><br><img src="/pic/physics/2023_09.png" alt="img"><br><img src="/pic/physics/2023_10.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>学习生活</category>
+      </categories>
+      <tags>
+        <tag>PPT</tag>
+        <tag>大学</tag>
+        <tag>物理创新实验设计</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>物理实验创新设计中期研讨(2023.12.03</title>
+    <url>/2023/12/03/%E7%89%A9%E7%90%86%E5%AE%9E%E9%AA%8C%E5%88%9B%E6%96%B0%E8%AE%BE%E8%AE%A1%E4%B8%AD%E6%9C%9F%E7%A0%94%E8%AE%A8(2023.12.03/</url>
+    <content><![CDATA[<p>你好！欢迎来到我的博客，这篇为物理创新实验设计中期研讨的ppt展示。由我们小组共同完成，<a href="https://gamma.app/signup?r=zwx09wxpqdntpfi%E3%80%82">ai生成PPT网址(https://gamma.app/signup?r=zwx09wxpqdntpfi)</a></p>
+<p><a href="/ppt/physics/2312030.pptx" title="ppt下载">展示ppt点击下载</a></p>
+<p><a href="/ppt/physics/2312031.pptx" title="ppt下载">原版ppt点击下载</a></p>
+<p><a href="http://hezi.space/2023/10/29/%E7%89%A9%E7%90%86%E5%88%9B%E6%96%B0%E5%AE%9E%E9%AA%8C%E8%AE%BE%E8%AE%A1/">上节回顾点击查看（即第一次研讨内容）</a></p>
+<p>本次研讨主要围绕声音的产生原理以及为何巨型发声板会发出向量而不寻常的声波展开（比较赶时间，而且实验器材不全，所以稍显仓促）</p>
+<p><img src="/pic/physics/2312030/2312030_01.png" alt="img"></p>
+<p>这里默认大家都知道研究课题（不知道的可以去看一下<a href="http://hezi.space/2023/10/29/%E7%89%A9%E7%90%86%E5%88%9B%E6%96%B0%E5%AE%9E%E9%AA%8C%E8%AE%BE%E8%AE%A1/">第一次研讨内容（点击即看）</a>）。</p>
+<p>我们决定研究先从声音切入，因为这部分相对来说会更加容易切入。</p>
+<p>所以让我先介绍一下声音的产生原理（基本所有声音的产生都如以下过程）</p>
+<p><img src="/pic/physics/2312030/2312030_02.png" alt="img"></p>
+<p>那为什么巨型发声板发出的声音不同寻常呢？众所周知，共振效应会使系统的振动幅度大幅提高，所以我们考虑了一下板材振动时的共振效应。</p>
+<p>下图为一个系统在不同输入频率和不同阻尼系数下的共振效应。</p>
+<p>让我来解释一下这张图：</p>
+<p>相信大家在中学阶段都学过共振曲线，具体表现和下图形状相似，只不过下图中最特殊的就是加入不同阻尼系数影响（即图中的 “德尔塔 &#x3D; Damping coefficient” ）。</p>
+<p>通过图表我们可以看出当阻尼系数逐渐减小时，振幅在物体固有频率等于输入频率的附近区间会明显地逐渐增大，而阻尼系数为0 且物体固有频率等于输入频率时，振幅则会趋于无穷大，也就是图表中的“Disastrous resonance when 德尔塔 &#x3D; 0 for 欧米伽A&#x2F;欧米伽0 &#x3D; 1”</p>
+<p>那我们不禁思考：巨型发声板是否可以减小阻尼，使共振的振幅更大，进而发出响亮而不同寻常的声音呢？</p>
+<p><img src="/pic/physics/2312030/2312030_03.png" alt="img"></p>
+<p>带着问题，我们设计了如下实验过程（改变变量环节ppt有误，过程应添加“改变板材的材质，厚度，大小，重复实验”）</p>
+<p><img src="/pic/physics/2312030/2312030_04.png" alt="img"></p>
+<p>但是电动活塞目前还没有到我们的手中，所以暂且用手工代替，不过这就体现了振动源的不准确性，所以我们获得的音频数据价值很低，下面是两段初步处理的音频演示，由于价值不高故只放出图片。</p>
+<p><img src="/pic/physics/2312030/2312030_05.png" alt="img"></p>
+<p>这里还有更多音频数据，同样由于价值不高故只放出图片。</p>
+<p><img src="/pic/physics/2312030/2312030_06.png" alt="img"></p>
+<p>此外，这是我们实验中遇到的问题。</p>
+<p><img src="/pic/physics/2312030/2312030_07.png" alt="img"></p>
+<p><img src="/pic/physics/2312030/2312030_08.png" alt="img"></p>
+<p>目前进度如此，后续器材到货之后，可能会把如何找到共振频率和对声波进行傅里叶变换的教程发上来，敬请期待~♥</p>
 ]]></content>
       <categories>
         <category>学习生活</category>
