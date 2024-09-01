@@ -473,7 +473,7 @@ start()
 <li><ol>
 <li>我们可以通过<code>ping</code>命令来检测网络是否正常，如果网络不正常，我们就执行<code>auto_login.sh</code>脚本。</li>
 </ol>
-<p>  首先创建ping文件夹和ping.sh文件并编辑：<br>  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir /root/ping</span><br><span class="line">cd /root/ping</span><br><span class="line">vi ping.sh</span><br></pre></td></tr></table></figure><br>  然后输入以下内容(带有路由器重启，不过我们学校工作日晚上会断网，所以我设置了十一点到八点断网不重启)：<br>  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/sh</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">ping 的总次数</span></span><br><span class="line">PING_SUM=3</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">ping 的间隔时间，单位秒</span></span><br><span class="line">SLEEP_SEC=10</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">连续重启网卡 REBOOT_CNT 次网络都没有恢复正常，重启软路由</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">时间= (SLEEP_SEC * PING_SUM + 20) * REBOOT_CNT</span></span><br><span class="line">REBOOT_CNT=3</span><br><span class="line">LOG_PATH=&quot;/root/ping/log.txt&quot;</span><br><span class="line">cnt=0</span><br><span class="line">reboot_cnt=0</span><br><span class="line">while :</span><br><span class="line">do</span><br><span class="line">    ping -c 1 -W 1 www.baidu.com &gt; /dev/null</span><br><span class="line">    ret=$?</span><br><span class="line">    </span><br><span class="line">    ping -c 1 -W 1 www.bilibili.com &gt; /dev/null</span><br><span class="line">    ret2=$?</span><br><span class="line">    if [[ $ret -eq 0 || $ret2 -eq 0 ]]</span><br><span class="line">    then</span><br><span class="line">        echo -e &#x27;network is ok\r&#x27;</span><br><span class="line">        exit</span><br><span class="line">        #cnt=0</span><br><span class="line">        #reboot_cnt=0</span><br><span class="line">    else</span><br><span class="line">        cnt=`expr $cnt + 1`</span><br><span class="line">        echo -n `date &#x27;+%Y-%m-%d %H:%M:%S&#x27;` &gt;&gt; $LOG_PATH</span><br><span class="line">        printf &#x27;-&gt; [%d/%d] Network maybe disconnected,checking again after %d seconds!\r\n&#x27; $cnt $PING_SUM $SLEEP_SEC &gt;&gt; $LOG_PATH</span><br><span class="line">        printf &#x27;-&gt; [%d/%d] Network maybe disconnected,checking again after %d seconds!\r\n&#x27; $cnt $PING_SUM $SLEEP_SEC </span><br><span class="line">        </span><br><span class="line">        if [ $cnt == $PING_SUM ]</span><br><span class="line">        then</span><br><span class="line">            echo &#x27;try to re curl&#x27; &gt;&gt; $LOG_PATH</span><br><span class="line">            echo &#x27;ifup wan!!!&#x27;</span><br><span class="line">            sleep 5</span><br><span class="line">            sh /root/auto_login/auto_login.sh</span><br><span class="line">            </span><br><span class="line">            cnt=0</span><br><span class="line">            #重连后，等待10秒再进行ping检测</span><br><span class="line">            sleep 8</span><br><span class="line">            #网卡重启超过指定次数还没恢复正常，重启软路由</span><br><span class="line">            reboot_cnt=`expr $reboot_cnt + 1`</span><br><span class="line">            if [ $reboot_cnt == $REBOOT_CNT ]</span><br><span class="line">            then</span><br><span class="line">                current_hour=`date &#x27;+%H&#x27;`</span><br><span class="line">                if [ $current_hour -ge 8 -a $current_hour -lt 23 ]</span><br><span class="line">                then</span><br><span class="line">                    echo -n `date &#x27;+%Y-%m-%d %H:%M:%S reboot!&#x27;` &gt;&gt; $LOG_PATH</span><br><span class="line">                    echo &#x27;-&gt; Network has some problem, lets reboot&#x27; &gt;&gt; $LOG_PATH</span><br><span class="line">                    echo &#x27;-&gt; =============== reboot!&#x27;</span><br><span class="line">                    reboot</span><br><span class="line">                fi</span><br><span class="line">            fi</span><br><span class="line">        fi</span><br><span class="line">    fi    </span><br><span class="line">    sleep $SLEEP_SEC</span><br><span class="line">done</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>  :wq，保存退出。</p>
+<p>  首先创建ping文件夹和ping.sh文件并编辑：<br>  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir /root/ping</span><br><span class="line">cd /root/ping</span><br><span class="line">vi ping.sh</span><br></pre></td></tr></table></figure><br>  然后输入以下内容(带有路由器重启，不过我们学校工作日晚上会断网，所以我设置了十一点到八点断网不重启)：<br>  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/sh</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ping 的总次数</span></span><br><span class="line">PING_SUM=3</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ping 的间隔时间，单位秒</span></span><br><span class="line">SLEEP_SEC=10</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">连续重启网卡 REBOOT_CNT 次网络都没有恢复正常，重启软路由</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">时间= (SLEEP_SEC * PING_SUM + 20) * REBOOT_CNT</span></span><br><span class="line">REBOOT_CNT=3</span><br><span class="line">cnt=0</span><br><span class="line">reboot_cnt=0</span><br><span class="line"></span><br><span class="line">while :</span><br><span class="line">do</span><br><span class="line">    ping -c 1 -W 1 www.baidu.com &gt; /dev/null</span><br><span class="line">    ret=$?</span><br><span class="line">    </span><br><span class="line">    ping -c 1 -W 1 www.bilibili.com &gt; /dev/null</span><br><span class="line">    ret2=$?</span><br><span class="line">    </span><br><span class="line">    if [[ $ret -eq 0 || $ret2 -eq 0 ]]</span><br><span class="line">    then</span><br><span class="line">        echo -e &#x27;network is ok\r&#x27;</span><br><span class="line">        exit</span><br><span class="line">    else</span><br><span class="line">        cnt=`expr $cnt + 1`</span><br><span class="line">        printf &#x27;-&gt; [%d/%d] Network maybe disconnected, checking again after %d seconds!\r\n&#x27; $cnt $PING_SUM $SLEEP_SEC </span><br><span class="line">        </span><br><span class="line">        if [ $cnt == $PING_SUM ]</span><br><span class="line">        then</span><br><span class="line">            echo &#x27;try to re curl&#x27;</span><br><span class="line">            echo &#x27;ifup wan!!!&#x27;</span><br><span class="line">            sleep 5</span><br><span class="line">            sh /root/auto_login/auto_login.sh</span><br><span class="line">            </span><br><span class="line">            cnt=0</span><br><span class="line">            # 重连后，等待10秒再进行ping检测</span><br><span class="line">            sleep 8</span><br><span class="line">            # 网卡重启超过指定次数还没恢复正常，重启软路由</span><br><span class="line">            reboot_cnt=`expr $reboot_cnt + 1`</span><br><span class="line">            if [ $reboot_cnt == $REBOOT_CNT ]</span><br><span class="line">            then</span><br><span class="line">                current_hour=`date &#x27;+%H&#x27;`</span><br><span class="line">                if [ $current_hour -ge 8 -a $current_hour -lt 23 ]</span><br><span class="line">                then</span><br><span class="line">                    echo &#x27;-&gt; Network has some problem, lets reboot&#x27;</span><br><span class="line">                    echo &#x27;-&gt; =============== reboot!&#x27;</span><br><span class="line">                    reboot</span><br><span class="line">                fi</span><br><span class="line">            fi</span><br><span class="line">        fi</span><br><span class="line">    fi    </span><br><span class="line">    sleep $SLEEP_SEC</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure><br>  :wq，保存退出。</p>
 <p>  给脚本运行权限：<br>  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chmod +x ping.sh</span><br></pre></td></tr></table></figure></p>
 <p>  然后我们可以先注销，再手动运行一下脚本，看看是否能够成功登录：<br>  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./ping.sh</span><br></pre></td></tr></table></figure></p>
 </li>
@@ -527,32 +527,6 @@ start()
 <p><img src="/pic/mentalhealth/202312180_06.png" alt="img"></p>
 <p><img src="/pic/mentalhealth/202312180_07.png" alt="img"></p>
 <p><img src="/pic/mentalhealth/202312180_08.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>学习生活</category>
-      </categories>
-      <tags>
-        <tag>PPT</tag>
-        <tag>大学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>政治小组展示(2023.10.26</title>
-    <url>/2023/10/26/%E6%94%BF%E6%B2%BB%E5%B0%8F%E7%BB%84%E5%B1%95%E7%A4%BA(10.26/</url>
-    <content><![CDATA[<p><img src="/pic/zhengzhi/1.png" alt="img"></p>
-<p><a href="%22https://www.bilibili.com/video/BV1z54y157pQ/?spm_id_from=333.337.search-card.all.click&vd_source=3e670711b1540d35ccfef2ba2ea5483b%22">此处视频不想下载点这里”https://www.bilibili.com/video/BV1z54y157pQ/?spm_id_from&#x3D;333.337.search-card.all.click&amp;vd_source&#x3D;3e670711b1540d35ccfef2ba2ea5483b”</a></p>
-<p><a href="https://url71.ctfile.com/f/47486571-964363200-a8cf56?p=5010">下载链接：“信仰，光芒万丈！”-1080P 高码率-AVC.mp4: https://url71.ctfile.com/f/47486571-964363200-a8cf56?p=5010(访问密码: 5010)</a></p>
-<p><img src="/pic/zhengzhi/2.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/3.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/4.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/5.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/6.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/7.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/8.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/9.png" alt="img"></p>
-<p><img src="/pic/zhengzhi/10.png" alt="img"></p>
-<p><a href="/ppt/zhengzhi/1.pptx" title="ppt下载">点击下载ppt</a></p>
-<p>[ai生成PPT网址：<a href="https://gamma.app/signup?r=zwx09wxpqdntpfi%5Dhttps://gamma.app/signup?r=zwx09wxpqdntpfi">https://gamma.app/signup?r=zwx09wxpqdntpfi]https://gamma.app/signup?r=zwx09wxpqdntpfi</a></p>
 ]]></content>
       <categories>
         <category>学习生活</category>
@@ -628,6 +602,65 @@ start()
         <tag>大学</tag>
         <tag>物理创新实验设计</tag>
         <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>政治小组展示(2023.10.26</title>
+    <url>/2023/10/26/%E6%94%BF%E6%B2%BB%E5%B0%8F%E7%BB%84%E5%B1%95%E7%A4%BA(10.26/</url>
+    <content><![CDATA[<p><img src="/pic/zhengzhi/1.png" alt="img"></p>
+<p><a href="%22https://www.bilibili.com/video/BV1z54y157pQ/?spm_id_from=333.337.search-card.all.click&vd_source=3e670711b1540d35ccfef2ba2ea5483b%22">此处视频不想下载点这里”https://www.bilibili.com/video/BV1z54y157pQ/?spm_id_from&#x3D;333.337.search-card.all.click&amp;vd_source&#x3D;3e670711b1540d35ccfef2ba2ea5483b”</a></p>
+<p><a href="https://url71.ctfile.com/f/47486571-964363200-a8cf56?p=5010">下载链接：“信仰，光芒万丈！”-1080P 高码率-AVC.mp4: https://url71.ctfile.com/f/47486571-964363200-a8cf56?p=5010(访问密码: 5010)</a></p>
+<p><img src="/pic/zhengzhi/2.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/3.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/4.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/5.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/6.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/7.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/8.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/9.png" alt="img"></p>
+<p><img src="/pic/zhengzhi/10.png" alt="img"></p>
+<p><a href="/ppt/zhengzhi/1.pptx" title="ppt下载">点击下载ppt</a></p>
+<p>[ai生成PPT网址：<a href="https://gamma.app/signup?r=zwx09wxpqdntpfi%5Dhttps://gamma.app/signup?r=zwx09wxpqdntpfi">https://gamma.app/signup?r=zwx09wxpqdntpfi]https://gamma.app/signup?r=zwx09wxpqdntpfi</a></p>
+]]></content>
+      <categories>
+        <category>学习生活</category>
+      </categories>
+      <tags>
+        <tag>PPT</tag>
+        <tag>大学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设备管理服务器</title>
+    <url>/2024/08/19/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="设备管理服务器"><a href="#设备管理服务器" class="headerlink" title="设备管理服务器"></a>设备管理服务器</h1><p>技术栈:</p>
+<ul>
+<li>服务器: debian 12</li>
+<li>系统: linux</li>
+<li>数据库: mysql</li>
+<li>语言: python</li>
+<li>框架: flask</li>
+<li>前端: vue</li>
+<li>代码管理: git</li>
+<li>代码托管: github</li>
+<li>服务器管理: ssh</li>
+<li>服务器部署: docker</li>
+<li>服务器监控: prometheus</li>
+<li>服务器日志: grafana</li>
+<li>服务器通知: dingding</li>
+<li>服务器备份: rsync</li>
+<li>服务器安全: fail2ban</li>
+<li>服务器防火墙: ufw</li>
+<li>服务器域名: cloudflare</li>
+<li>服务器证书: letsencrypt</li>
+<li>服务器缓存: redis</li>
+<li>服务器消息队列: rabbitmq</li>
+<li>服务器搜索引擎: elasticsearch</li>
+<li>服务器日志分析: logstash</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>设备管理服务器</tag>
       </tags>
   </entry>
   <entry>
